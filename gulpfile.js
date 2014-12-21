@@ -7,17 +7,29 @@ var minifyCSS  = require('gulp-minify-css');
 var watch      = require('gulp-watch');
 var connect    = require('gulp-connect');
 
+var paths = {
+  'js': [
+    'src/js/squirrel.js',
+    'src/js/utils/*.js',
+    'src/js/math/*.js',
+    'src/js/entities/*.js'
+  ],
+  'css': [
+    'src/css/*.sass'
+  ]
+};
+
 gulp.task('build-js', function() {
-  return gulp.src('src/js/*.js')
+  return gulp.src(paths.js)
              .pipe(sourcemaps.init())
-             .pipe(uglify())
+             //.pipe(uglify())
              .pipe(concat('build.min.js'))
              .pipe(sourcemaps.write())
              .pipe(gulp.dest('build/js'));
 });
 
 gulp.task('build-css', function() {
-  return gulp.src('src/css/*.sass')
+  return gulp.src(paths.css)
              .pipe(sourcemaps.init())
              .pipe(sass())
              .pipe(concat('build.min.css'))
@@ -49,4 +61,4 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('default', ['watch', 'server']);
+gulp.task('default', ['build', 'watch', 'server']);

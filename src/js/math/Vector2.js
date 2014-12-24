@@ -20,6 +20,10 @@ squirrel.Vector2 = (function() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   };
 
+  Vector2.prototype.distance = function(v2) {
+    return Math.sqrt(Math.pow(this.x - v2.x, 2) + Math.pow(this.y - v2.y, 2));
+  };
+
   Vector2.prototype.angleBetween = function(v2) {
     return Math.atan2(this.y - v2.y, this.x - v2.x);
   };

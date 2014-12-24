@@ -61,4 +61,4 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('default', ['build', 'watch', 'server']);
+gulp.task('default', ['watch', 'server']);

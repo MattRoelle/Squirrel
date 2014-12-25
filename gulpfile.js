@@ -16,6 +16,9 @@ var paths = {
   ],
   'css': [
     'src/css/*.sass'
+  ],
+  'tests': [
+    'tests/tests/*.js'
   ]
 };
 
@@ -38,7 +41,14 @@ gulp.task('build-css', function() {
              .pipe(gulp.dest('build/css'));
 });
 
-gulp.task('build', ['build-js', 'build-css']);
+gulp.task('build-tests', function() {
+  return gulp.src(paths.tests)
+             .pipe(uglify())
+             .pipe(concat('tests.js'))
+             .pipe(gulp.dest('tests/'));
+});
+
+gulp.task('build', ['build-js', 'build-tests', 'build-css']);
 
 gulp.task('server', function() {
   connect.server({
@@ -57,7 +67,7 @@ gulp.task('reload', function() {
 
 
 gulp.task('watch', function() {
-  return gulp.watch('src/**/*', ['build', 'reload']);
+  return gulp.watch([paths.js, paths.tests], ['build', 'reload']);
 });
 
 
